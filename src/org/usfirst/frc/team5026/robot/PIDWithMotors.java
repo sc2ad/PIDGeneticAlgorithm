@@ -13,6 +13,7 @@ public class PIDWithMotors {
 	int motor; //RN this is just the current speed, will add an object later
 	double error = 14000;
 	double totalError = 0;
+	double totalPositiveError = 0;
 	double prevError = 14000;
 	double maxRPM = 10000.0;
 	double voltage = 0.0;
@@ -40,6 +41,7 @@ public class PIDWithMotors {
 	public double getError() {
 		error = target - motor;
 		totalError += error;
+		totalPositiveError += Math.abs(error);
 		return error;
 	}
 	public double getNewSpeed() {
@@ -48,6 +50,22 @@ public class PIDWithMotors {
 			return p * getError() + i * totalError + d * (error - prevError) + f * target;
 		}
 		return target;
+	}
+	public void setPID(double p, double i, double d, double f) {
+		this.p = p;
+		this.i = i;
+		this.d = d;
+		this.f = f;
+	}
+	public void reset() {
+		error = 14000;
+		totalError = 0;
+		totalPositiveError = 0;
+		prevError = 0;
+		wantedVoltage = 0;
+		currentExponentialError = 45000;
+		lastExponentialError = 45000;
+		voltage = 0;
 	}
 	public double getVoltage() {
 		voltage = motor / maxRPM; //current speed
