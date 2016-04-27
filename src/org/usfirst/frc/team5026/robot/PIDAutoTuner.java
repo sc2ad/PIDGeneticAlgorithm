@@ -34,7 +34,7 @@ public class PIDAutoTuner {
 	        IChromosome sampleChromosome = new Chromosome(gaConf, new BooleanGene(gaConf), chromeSize); //NEED TO FIX 2nd PARAMETER
 	        gaConf.setSampleChromosome(sampleChromosome);
 	        gaConf.setPopulationSize(20);
-	        gaConf.setFitnessFunction(new MaxFunction()); //WILL BE MY COOL FUNCTION HERE
+	        gaConf.setFitnessFunction(new ()); //WILL BE MY COOL FUNCTION HERE
 	        genotype = Genotype.randomInitialGenotype(gaConf);
 	    }
 	    catch (InvalidConfigurationException e) {
